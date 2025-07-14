@@ -13,7 +13,7 @@ pub struct UserPayload {
 pub struct User {
     id: Uuid,
     username: String,
-    hashed_password: String,
+    pub hashed_password: String,
     created_at: chrono::DateTime<Utc>,
     updated_at: chrono::DateTime<Utc>,
     last_login_at: chrono::DateTime<Utc>
