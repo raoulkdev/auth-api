@@ -3,6 +3,7 @@ use crate::server::Server;
 mod handlers;
 mod server;
 mod router;
+mod user;
 
 #[tokio::main]
 async fn main() {

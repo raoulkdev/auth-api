@@ -32,7 +32,7 @@ impl Server {
                     hashed_password TEXT NOT NULL,
                     created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
                     updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
-                    last_login_at TIMESTAMP WITH TIME ZONE
+                    last_login_at TIMESTAMP WITH TIME ZONE NOT NULL
                 )").execute(&db).await.unwrap();
                 Ok(db)
             }
@@ -46,7 +46,7 @@ impl Server {
         match listener { 
             Ok(l) => {
                 println!("{}{}", "Successfully started server at: ".bright_green(), l.local_addr().unwrap());
-                axum::serve(l, router()).await.unwrap()
+                axum::serve(l, router(self.users_database.clone())).await.unwrap()
             }
             Err(e) => {
                 println!("{}{e}", "Could not start server: ".bright_red());

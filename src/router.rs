@@ -1,9 +1,12 @@
+use std::sync::Arc;
 use axum::Router;
-use axum::routing::get;
-use crate::handlers::hello_world;
+use axum::routing::{get, post};
+use sqlx::{Pool, Postgres};
+use crate::handlers::{create_user};
 
 // Endpoint router
-pub fn router() -> Router {
+pub fn router(users_database: Arc<Pool<Postgres>> ) -> Router {
     Router::new()
-        .route("/", get(hello_world))
+        .route("/users", post(create_user))
+        .with_state(users_database)
 }
