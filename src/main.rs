@@ -7,10 +7,10 @@ mod user;
 
 #[tokio::main]
 async fn main() {
-    // Create and start a new server (Change localhost if you woult l and database)
+    // Create and start a new server
     Server::new(
-        "localhost:3000",
-        "postgres://postgres:secret@localhost:5432/postgres",
+        "localhost:3000",                                           // Update this to wherever you want
+        "postgres://postgres:secret@localhost:5432/postgres",   // Create a database and update this as well
     )
     .await
     .start()
